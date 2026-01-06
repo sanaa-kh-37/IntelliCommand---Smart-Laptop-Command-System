@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
-// Inheritance: Extends BaseController
+
 public class LoginController extends BaseController {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
@@ -45,10 +45,10 @@ public class LoginController extends BaseController {
             Parent root = loader.load();
             Scene newScene = new Scene(root, 800, 600);
 
-            // Set user data on the NEW scene (fixed)
+
             newScene.setUserData(user);
 
-            // Safely add CSS
+
             URL cssUrl = getClass().getResource("/com/example/commandinterpreter/styles.css");
             if (cssUrl != null) {
                 newScene.getStylesheets().add(cssUrl.toExternalForm());

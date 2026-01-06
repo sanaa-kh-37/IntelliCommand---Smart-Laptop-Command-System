@@ -13,22 +13,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandFactory {
-    private final Map<String, Command> cache = new HashMap<>();
-    private final ConfigLoader configLoader = new ConfigLoader(); // For future JSON extensions
+    private final Map<String, Command> commandsMap = new HashMap<>();
+    private final ConfigLoader loader = new ConfigLoader(); // For future JSON extensions
+
 
     public Command getCommand(String userInput) {
         String key = userInput.toLowerCase().trim();
-        return cache.computeIfAbsent(key, this::createCommand);
+        return commandsMap.computeIfAbsent(key, this::createCommand);
     }
 
     // Add this method for autocomplete
     public List<String> getAllKnownCommands() {
-        return new ArrayList<>(cache.keySet()); // Returns List<String>
+        return new ArrayList<>(commandsMap.keySet()); // Returns List<String>
     }
 
     private Command createCommand(String key) {
         // First try dynamic commands from JSON (if any)
-        Command dynamic = configLoader.loadCommand(key);
+        Command dynamic = loader.loadCommand(key);
         if (dynamic != null) return dynamic;
 
         // Built-in safe commands (all lowercase)

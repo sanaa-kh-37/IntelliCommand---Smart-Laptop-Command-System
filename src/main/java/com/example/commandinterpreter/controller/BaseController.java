@@ -24,7 +24,6 @@ public abstract class BaseController {
         Parent root = loader.load();
         Scene scene = new Scene(root, width, height);
 
-        // Safely add stylesheet if exists
         URL cssUrl = getClass().getResource("/com/example/commandinterpreter/styles.css");
         if (cssUrl != null) {
             scene.getStylesheets().add(cssUrl.toExternalForm());

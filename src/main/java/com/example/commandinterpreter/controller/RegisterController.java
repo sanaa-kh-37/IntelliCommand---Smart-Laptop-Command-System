@@ -2,6 +2,8 @@ package com.example.commandinterpreter.controller;
 
 import com.example.commandinterpreter.model.Role;
 import com.example.commandinterpreter.service.AuthService;
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -9,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -74,7 +77,23 @@ public class RegisterController extends BaseController {
         // Re-enable button in case of failure
         submitButton.setDisable(false);
     }
+    @FXML
+    private void initialize() {
+        FadeTransition fadeUsername = new FadeTransition(Duration.millis(600), usernameField);
+        fadeUsername.setFromValue(0);
+        fadeUsername.setToValue(1);
+        fadeUsername.setDelay(Duration.millis(200));
 
+        FadeTransition fadePassword = new FadeTransition(Duration.millis(600), passwordField);
+        fadePassword.setFromValue(0);
+        fadePassword.setToValue(1);
+        fadePassword.setDelay(Duration.millis(400));
+
+        // Add more for confirmPasswordField in Register
+
+        ParallelTransition pt = new ParallelTransition(fadeUsername, fadePassword);
+        pt.play();
+    }
     @Override
     protected Node getReferenceNode() {
         // Used by BaseController to get current stage

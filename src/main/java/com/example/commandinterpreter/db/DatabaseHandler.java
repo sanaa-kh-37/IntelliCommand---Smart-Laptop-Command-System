@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHandler {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/command_interpreter_db?useSSL=false&serverTimezone=UTC";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/command_interpreter_db?allowPublicKeyRetrieval=true&useSSL=false";
     private static final String USER = "root";
-    private static final String PASS = "12345";
+    private static final String PASS = "Meow12345";
 
     public DatabaseHandler() {
         createTableIfNotExists();
