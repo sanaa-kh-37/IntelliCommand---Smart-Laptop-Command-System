@@ -1,69 +1,83 @@
 package com.example.commandinterpreter.controller;
 
-import com.example.commandinterpreter.db.DatabaseHandler;
-import com.example.commandinterpreter.model.User;
+import com.example.commandinterpreter.model.Role;
+import com.example.commandinterpreter.service.AuthService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 
-public class RegisterController {
-    @FXML
-    private TextField usernameField;
+// Inheritance: Extends BaseController for shared functionality
+public class RegisterController extends BaseController {
 
-    @FXML
-    private PasswordField passwordField;
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private PasswordField confirmPasswordField;
 
-    @FXML
-    private PasswordField confirmPasswordField;
-
-    private final DatabaseHandler dbHandler = new DatabaseHandler();
+    private final AuthService authService = new AuthService();
 
     @FXML
     private void handleRegisterSubmit(ActionEvent event) throws IOException {
-        String username = usernameField.getText();
+        // Get and trim input
+        String username = usernameField.getText().trim();
         String password = passwordField.getText();
-        String confirmPassword = confirmPasswordField.getText();
+        String confirm = confirmPasswordField.getText();
 
-        if (!password.equals(confirmPassword)) {
-            showAlert("Registration Failed", "Passwords do not match.");
+        // === Input Validation (in correct order) ===
+
+        // Check empty fields first
+        if (username.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Input Required", "Please fill in all fields.");
             return;
         }
 
-        User user = new User(username, password);
-        if (dbHandler.registerUser(user)) {
-            showAlert("Success", "User registered successfully.");
-            switchToLoginScene();
+        // Check password match
+        if (!password.equals(confirm)) {
+            showAlert(Alert.AlertType.ERROR, "Password Mismatch", "Passwords do not match. Please try again.");
+            return;
+        }
+
+        // Optional: Username format validation (basic)
+        if (username.length() < 3) {
+            showAlert(Alert.AlertType.WARNING, "Weak Username", "Username should be at least 3 characters long.");
+            return;
+        }
+
+        // Disable button to prevent double-click submission
+        Button submitButton = (Button) event.getSource();
+        submitButton.setDisable(true);
+
+        // === Attempt Registration ===
+        boolean registered = authService.registerUser(username, password, Role.USER);
+
+        if (registered) {
+            // Success!
+            showAlert(Alert.AlertType.INFORMATION, "Success!",
+                    "User '" + username + "' registered successfully!\nYou can now log in.");
+            // Clear fields for good UX
+            usernameField.clear();
+            passwordField.clear();
+            confirmPasswordField.clear();
+            // Go back to login screen
+            switchScene("/com/example/commandinterpreter/login.fxml", 600, 500);
         } else {
-            showAlert("Registration Failed", "Username already exists or error occurred.");
+            // Failure – most likely duplicate username
+            showAlert(Alert.AlertType.ERROR, "Registration Failed",
+                    "The username '" + username + "' is already taken.\nPlease choose a different one.");
         }
+
+        // Re-enable button in case of failure
+        submitButton.setDisable(false);
     }
 
-    private void switchToLoginScene() throws IOException {
-        Stage stage = (Stage) usernameField.getScene().getWindow();
-        URL resource = getClass().getResource("/com/example/commandinterpreter/login.fxml");
-        if (resource == null) {
-            throw new IllegalStateException("Cannot find /com/example/commandinterpreter/login.fxml!");
-        }
-        System.out.println("Found login.fxml at: " + resource);
-
-        FXMLLoader loader = new FXMLLoader(resource);
-        Parent root = loader.load();
-        stage.setScene(new Scene(root, 600, 400));
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.showAndWait();
+    @Override
+    protected Node getReferenceNode() {
+        // Used by BaseController to get current stage
+        return usernameField;
     }
 }

@@ -13,16 +13,18 @@ FLUSH PRIVILEGES;
 -- Step 4: Switch to the Database
 USE command_interpreter_db;
 
--- Step 5: Create the Users Table (matches your Java code)
+-- Step 5: Create the Users Table (with role for scalability/role-based access)
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
+    role ENUM('USER', 'ADMIN') NOT NULL DEFAULT 'USER', -- Added for polymorphism in command access
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Optional: Insert a Test User for Debugging
-INSERT INTO users (username, password) VALUES ('testuser', 'testpass');
+-- Optional: Insert Test Users (demonstrating roles)
+INSERT INTO users (username, password, role) VALUES ('testuser', 'testpass', 'USER');
+INSERT INTO users (username, password, role) VALUES ('admin', 'adminpass', 'ADMIN');
 
 -- Step 6: Verify Setup
 SELECT * FROM users;

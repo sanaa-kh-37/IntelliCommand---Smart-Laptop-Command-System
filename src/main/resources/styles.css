@@ -1,0 +1,26 @@
+/* Global styles (Scalable: Themeable) */
+.root {
+    -fx-background-color: #f4f4f4;
+    -fx-font-family: "Arial";
+}
+
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+}
+
+.list-view {
+    -fx-background-color: white;
+}
+
+/* More styles for advanced UI */
+.header-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}

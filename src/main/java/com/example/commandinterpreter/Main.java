@@ -14,20 +14,18 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        // Absolute path for consistency
+        // Load login FXML (Abstraction: UI separated from logic)
         URL resource = getClass().getResource("/com/example/commandinterpreter/login.fxml");
         if (resource == null) {
-            throw new IllegalStateException("Cannot find /com/example/commandinterpreter/login.fxml!");
+            throw new IllegalStateException("Cannot find login.fxml");
         }
-        System.out.println("Found login.fxml at: " + resource);
-
         FXMLLoader loader = new FXMLLoader(resource);
         Parent root = loader.load();
-        primaryStage.setTitle("Command Interpreter");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setTitle("IntelliCommand - Voice Command Interpreter");
+        primaryStage.setScene(new Scene(root, 600, 500)); // Larger for advanced layout
         primaryStage.show();
 
-        // Optional: Test DB connection (remove later)
+        // Test DB (remove in prod)
         new DatabaseHandler().testConnection();
     }
 

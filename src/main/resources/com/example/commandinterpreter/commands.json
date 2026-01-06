@@ -1,0 +1,32 @@
+[
+  {
+    "key": "open google",
+    "type": "browser",
+    "osCommand": "https://www.google.com",
+    "feedback": "Opening Google"
+  },
+  {
+    "key": "open youtube",
+    "type": "browser",
+    "osCommand": "https://www.youtube.com",
+    "feedback": "Opening YouTube"
+  },
+  {
+    "key": "open gmail",
+    "type": "browser",
+    "osCommand": "https://mail.google.com",
+    "feedback": "Opening Gmail"
+  },
+  {
+    "key": "restart pc",
+    "type": "power",
+    "osCommand": "shutdown /r /t 10",
+    "feedback": "Restarting in 10 seconds"
+  },
+  {
+    "key": "open notepad",
+    "type": "system",
+    "osCommand": "notepad",
+    "feedback": "Opening Notepad"
+  }
+]
