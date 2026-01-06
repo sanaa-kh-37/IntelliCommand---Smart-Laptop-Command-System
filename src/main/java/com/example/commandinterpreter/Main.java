@@ -21,7 +21,7 @@ public class Main extends Application {
         }
         FXMLLoader loader = new FXMLLoader(resource);
         Parent root = loader.load();
-        primaryStage.setTitle("IntelliCommand - Voice Command Interpreter");
+        primaryStage.setTitle("IntelliCommand");
         primaryStage.setScene(new Scene(root, 600, 500)); // Larger for advanced layout
         primaryStage.show();
 
@@ -31,5 +31,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
     }
 }

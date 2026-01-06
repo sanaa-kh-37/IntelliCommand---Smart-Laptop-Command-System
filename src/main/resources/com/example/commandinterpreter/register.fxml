@@ -54,6 +54,15 @@
                     style="-fx-font-size: 16px; -fx-font-weight: bold;
                            -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #50C878 0%, #3498db 100%);
                            -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 12 30;"/>
+
+
+            <!-- Go back button with same gradient -->
+            <Button text="Back"
+                    onAction="#handleGoBackToLogin"
+                    prefWidth="170"
+                    style="-fx-font-size: 16px; -fx-font-weight: bold;
+                   -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #50C878 0%, #3498db 100%);
+                   -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 12 30;"/>
         </VBox>
     </VBox>
 </VBox>

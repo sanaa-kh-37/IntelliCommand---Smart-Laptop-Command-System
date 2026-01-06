@@ -6,13 +6,18 @@ import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.awt.*;
 import java.io.IOException;
 
 // Inheritance: Extends BaseController for shared functionality
@@ -99,4 +104,24 @@ public class RegisterController extends BaseController {
         // Used by BaseController to get current stage
         return usernameField;
     }
+    @FXML
+    public void handleGoBackToLogin(ActionEvent event) {
+        try {
+            // Load the Login FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/commandinterpreter/login.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage/window from the event
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Intellicommand"); // consistent title
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
