@@ -2,48 +2,60 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
 
 <BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.commandinterpreter.controller.MainController">
+            fx:controller="com.example.commandinterpreter.controller.MainController"
+            style="-fx-background-color: #f8f9fa;">
 
+    <!-- Top Header -->
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15; -fx-background-color: #2d2d30;">
-            <Label text="IntelliCommand" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20; -fx-background-color: #ffffff; -fx-border-color: #e0e0e0; -fx-border-width: 0 0 1 0;">
+            <Label text="IntelliCommand" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
             <Region HBox.hgrow="ALWAYS"/>
-            <Button fx:id="themeButton" text="🌙 Dark Mode" style="-fx-font-size: 16px; -fx-background-color: transparent; -fx-text-fill: white;" onAction="#toggleTheme"/>
-            <Button text="Logout" onAction="#handleLogout" style="-fx-background-color: #ff4444; -fx-text-fill: white; -fx-padding: 8 20; -fx-background-radius: 20;"/>
+            <Label fx:id="userLabel" text="Logged in as: Guest" style="-fx-font-size: 16px; -fx-text-fill: #27ae60;"/>
         </HBox>
     </top>
 
+    <!-- Left: Dropdown History -->
+    <left>
+        <VBox spacing="15" style="-fx-padding: 20; -fx-background-color: #ffffff; -fx-border-color: #e0e0e0; -fx-border-width: 0 1 0 0;">
+            <Button text="📜 History ▼" fx:id="historyToggleBtn" onAction="#toggleHistory"
+                    style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10 20; -fx-background-radius: 20;"/>
+            <VBox fx:id="historyPanel" visible="false" managed="false" spacing="8" style="-fx-padding: 10;">
+                <Label text="Recent Commands" style="-fx-font-size: 14px; -fx-text-fill: #495057;"/>
+                <ListView fx:id="historyList" prefHeight="400" prefWidth="250"
+                          style="-fx-background-color: #f8f9fa; -fx-border-color: #dee2e6; -fx-border-radius: 10;"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- Center: Command Input Only -->
     <center>
-        <VBox alignment="CENTER" spacing="20" style="-fx-padding: 40; -fx-background-color: #1e1e1e; -fx-background-radius: 20;">
-            <Label fx:id="userLabel" text="Logged in as: Guest" style="-fx-font-size: 16px; -fx-text-fill: #a0ffa0;"/>
-
-            <!-- Quick Actions Bar -->
-            <HBox spacing="15" alignment="CENTER">
-                <Button text="📝 Notepad" onAction="#quickNotepad" style="-fx-background-color: #007acc; -fx-text-fill: white; -fx-padding: 10 20; -fx-background-radius: 15;"/>
-                <Button text="🧮 Calculator" onAction="#quickCalculator" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-padding: 10 20; -fx-background-radius: 15;"/>
-                <Button text="📸 Screenshot" onAction="#quickScreenshot" style="-fx-background-color: #fd7e14; -fx-text-fill: white; -fx-padding: 10 20; -fx-background-radius: 15;"/>
-                <Button text="▶ YouTube" onAction="#quickYoutube" style="-fx-background-color: #ff0000; -fx-text-fill: white; -fx-padding: 10 20; -fx-background-radius: 15;"/>
-            </HBox>
-
-            <!-- Command Input -->
+        <VBox alignment="CENTER" spacing="30" style="-fx-padding: 80;">
             <ComboBox fx:id="commandCombo" promptText="Type a command..." prefWidth="600" editable="true"
-                      style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 30; -fx-padding: 12; -fx-font-size: 18px;"/>
+                      style="-fx-background-color: white; -fx-background-radius: 30; -fx-padding: 15; -fx-font-size: 18px; -fx-border-color: #ced4da; -fx-border-radius: 30;"/>
 
-            <!-- Execute + Voice Button -->
-            <HBox spacing="15" alignment="CENTER">
-                <Button text="Execute ➤" onAction="#handleExecute" style="-fx-background-color: #6e56ff; -fx-text-fill: white; -fx-font-size: 18px; -fx-padding: 12 40; -fx-background-radius: 30;"/>
-                <Button text="🎤" style="-fx-background-color: #ff4444; -fx-text-fill: white; -fx-font-size: 24px; -fx-pref-width: 60; -fx-pref-height: 60; -fx-background-radius: 50%;"/>
-            </HBox>
-
-            <!-- Output -->
-            <TextArea fx:id="outputArea" editable="false" prefHeight="250" prefWidth="700" wrapText="true"
-                      style="-fx-background-color: #00000080; -fx-text-fill: #e0e0e0; -fx-font-family: Consolas; -fx-background-radius: 15;"/>
-
-            <!-- History List -->
-            <ListView fx:id="historyList" prefHeight="200" prefWidth="700"/>
+            <Button text="Execute ➜" onAction="#handleExecute"
+                    style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 20px; -fx-padding: 15 60; -fx-background-radius: 30;"/>
         </VBox>
     </center>
+
+    <!-- Right: Quick Actions -->
+    <right>
+        <VBox spacing="15" alignment="TOP_CENTER" style="-fx-padding: 40;">
+            <Label text="Quick Actions" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #495057;"/>
+
+            <Button text="📝 Notepad" onAction="#quickNotepad" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-padding: 12 30; -fx-background-radius: 25;"/>
+            <Button text="🧮 Calculator" onAction="#quickCalculator" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-padding: 12 30; -fx-background-radius: 25;"/>
+            <Button text="📸 Screenshot" onAction="#quickScreenshot" style="-fx-background-color: #fd7e14; -fx-text-fill: white; -fx-padding: 12 30; -fx-background-radius: 25;"/>
+            <Button text="▶ YouTube" onAction="#quickYoutube" style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-padding: 12 30; -fx-background-radius: 25;"/>
+            <Button text="🖥 Task Manager" onAction="#quickTaskManager" style="-fx-background-color: #6f42c1; -fx-text-fill: white; -fx-padding: 12 30; -fx-background-radius: 25;"/>
+            <Button text="⚙ Settings" onAction="#quickSettings" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-padding: 12 30; -fx-background-radius: 25;"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Logout" onAction="#handleLogout"
+                    style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 12 40; -fx-background-radius: 30;"/>
+        </VBox>
+    </right>
 </BorderPane>
