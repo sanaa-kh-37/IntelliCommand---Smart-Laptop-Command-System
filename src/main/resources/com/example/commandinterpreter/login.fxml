@@ -9,7 +9,7 @@
       style="-fx-background-color: linear-gradient(to bottom, #120029, #4c0070, #8a2be2);
              -fx-padding: 50;">
 
-    <VBox styleClass="auth-glass-card" alignment="CENTER" spacing="40" prefWidth="540" prefHeight="680">
+    <VBox styleClass="auth-glass-card" alignment="CENTER" spacing="45" prefWidth="540" prefHeight="720">
 
         <Label text="Welcome Back!" styleClass="auth-title"/>
 
