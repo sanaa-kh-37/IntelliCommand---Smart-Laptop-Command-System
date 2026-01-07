@@ -11,7 +11,7 @@ import java.util.List;
 public class DatabaseHandler {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/command_interpreter_db?allowPublicKeyRetrieval=true&useSSL=false";
     private static final String USER = "root";
-    private static final String PASS = "12345";
+    private static final String PASS = "Meow12345";
 
     public DatabaseHandler() {
         createTableIfNotExists();
@@ -22,7 +22,7 @@ public class DatabaseHandler {
     }
 
     private void createTableIfNotExists() {
-        // Abstraction: Hides table creation details
+
         String sql = """
                 CREATE TABLE IF NOT EXISTS users (
                     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -40,7 +40,6 @@ public class DatabaseHandler {
         }
     }
 
-    // In DatabaseHandler.java
 
     public boolean registerUser(User user) {
         if (user == null || user.getUsername() == null || user.getPassword() == null) {
@@ -62,11 +61,11 @@ public class DatabaseHandler {
             return true;
 
         } catch (SQLException e) {
-            if (e.getErrorCode() == 1062) { // MySQL duplicate entry code
+            if (e.getErrorCode() == 1062) {
                 System.out.println("Duplicate username: " + user.getUsername());
             } else {
                 System.err.println("Database error during registration:");
-                e.printStackTrace(); // This will show real error in console
+                e.printStackTrace();
             }
             return false;
         }
@@ -90,18 +89,18 @@ public class DatabaseHandler {
                 String roleStr = rs.getString("role");
                 Role role = Role.valueOf(roleStr);
 
-                // Check if password is already hashed (starts with $2a$, $2b$, $2x$, or $2y$)
+
                 if (storedPassword.startsWith("$2")) {
                     // Hashed with BCrypt → normal check
                     if (BCrypt.checkpw(password, storedPassword)) {
                         return new User(username, password, role);
                     }
                 } else {
-                    // Old plain text password → compare directly AND upgrade to BCrypt!
+
                     if (storedPassword.equals(password)) {
                         System.out.println("Upgrading old plain password to BCrypt for: " + username);
 
-                        // Hash and update in DB
+
                         String newHashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
                         updatePassword(username, newHashed);
 
