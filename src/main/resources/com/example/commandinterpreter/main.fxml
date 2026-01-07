@@ -6,7 +6,7 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.commandinterpreter.controller.MainController"
-            stylesheets="@/styles.css">
+            stylesheets="@styles.css">
 
     <!-- Header -->
     <top>
@@ -17,8 +17,25 @@
         </HBox>
     </top>
 
-    <!-- History Panel (Left) -->
+    <!-- Quick Actions - NOW ON THE LEFT -->
     <left>
+        <VBox styleClass="quick-actions">
+            <Label text="Quick Actions" styleClass="quick-label"/>
+
+            <Button text="📝 Notepad" onAction="#quickNotepad" styleClass="quick-button"/>
+            <Button text="🧮 Calculator" onAction="#quickCalculator" styleClass="quick-button"/>
+            <Button text="📸 Screenshot" onAction="#quickScreenshot" styleClass="quick-button"/>
+            <Button text="▶ YouTube" onAction="#quickYoutube" styleClass="quick-button"/>
+            <Button text="🖥 Task Manager" onAction="#quickTaskManager" styleClass="quick-button"/>
+            <Button text="⚙ Settings" onAction="#quickSettings" styleClass="quick-button"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button text="Logout" onAction="#handleLogout" styleClass="logout-button"/>
+        </VBox>
+    </left>
+
+    <!-- History Panel - NOW ON THE RIGHT -->
+    <right>
         <VBox styleClass="history-panel" spacing="15">
             <Button text="📜 History ▼" fx:id="historyToggleBtn" onAction="#toggleHistory" styleClass="history-toggle"/>
             <VBox fx:id="historyPanel" visible="false" managed="false" spacing="10">
@@ -26,32 +43,16 @@
                 <ListView fx:id="historyList" prefHeight="400" prefWidth="280" styleClass="history-list"/>
             </VBox>
         </VBox>
-    </left>
+    </right>
 
-    <!-- Main Command Area (Center) -->
+    <!-- Central Command Input -->
     <center>
-        <VBox styleClass="command-interface">
-            <ComboBox fx:id="commandCombo" promptText="Type a command..." prefWidth="700" editable="true" styleClass="command-input"/>
+        <VBox styleClass="command-section" spacing="25" alignment="CENTER">
+            <TextField fx:id="commandInput" promptText="Type your command here..."
+                       prefWidth="600" styleClass="command-input"/>
             <Button text="Execute ➜" onAction="#handleExecute" styleClass="execute-button"/>
-            <Label text="✨ AI-powered command suggestions enabled" styleClass="ai-hint"/>
+            <Label text="Type any command manually" styleClass="ai-hint"/>
         </VBox>
     </center>
-
-    <!-- Quick Actions (Right) -->
-    <right>
-        <VBox styleClass="quick-actions">
-            <Label text="Quick Actions" styleClass="quick-label"/>
-
-            <Button text="📝 Notepad" onAction="#quickNotepad" styleClass="quick-button notepad-button"/>
-            <Button text="🧮 Calculator" onAction="#quickCalculator" styleClass="quick-button calculator-button"/>
-            <Button text="📸 Screenshot" onAction="#quickScreenshot" styleClass="quick-button screenshot-button"/>
-            <Button text="▶ YouTube" onAction="#quickYoutube" styleClass="quick-button youtube-button"/>
-            <Button text="🖥 Task Manager" onAction="#quickTaskManager" styleClass="quick-button taskmanager-button"/>
-            <Button text="⚙ Settings" onAction="#quickSettings" styleClass="quick-button settings-button"/>
-
-            <Region VBox.vgrow="ALWAYS"/>
-            <Button text="Logout" onAction="#handleLogout" styleClass="logout-button"/>
-        </VBox>
-    </right>
 
 </BorderPane>

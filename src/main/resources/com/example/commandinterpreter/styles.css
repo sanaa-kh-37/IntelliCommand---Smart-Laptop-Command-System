@@ -1,0 +1,208 @@
+/* IntelliCommand - Purple AI Theme (Inspired by Figma Design) */
+
+.root {
+    -fx-background-color: linear-gradient(to bottom, #030213, #4c1d95, #a855f7);
+
+    /* Subtle starry glitter effect */
+    -fx-background-image:
+        radial-gradient(center 15% 25%, radius 2%, rgba(255,255,255,0.8) 0%, transparent 10%),
+        radial-gradient(center 40% 60%, radius 1.5%, rgba(255,255,255,0.6) 0%, transparent 8%),
+        radial-gradient(center 70% 40%, radius 2%, rgba(168,85,247,0.7) 0%, transparent 12%),
+        radial-gradient(center 90% 80%, radius 1.8%, rgba(255,255,255,0.5) 0%, transparent 10%),
+        radial-gradient(center 55% 90%, radius 2.2%, rgba(168,85,247,0.6) 0%, transparent 15%);
+    -fx-background-size: cover;
+}
+
+/* Header */
+.header {
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+    -fx-border-color: rgba(168, 85, 247, 0.3);
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 15, 0.2, 0, 5);
+}
+
+.logo {
+    -fx-font-family: "System Bold";
+    -fx-font-size: 32px;
+    -fx-text-fill: #e9d8fd;
+    -fx-effect: innershadow(gaussian, #b388ff, 15, 0.6, 0, 0);
+}
+
+.user-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #a0f7a0;
+}
+
+/* History Panel */
+.history-panel {
+    -fx-padding: 20;
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 15;
+}
+
+.history-toggle {
+    -fx-background-color: #7c3aed;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 3);
+}
+
+/* History List - Beautiful Purple Theme */
+.history-list {
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(168, 85, 247, 0.4);
+    -fx-border-radius: 20;
+    -fx-border-width: 2;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(gaussian, rgba(168, 85, 247, 0.4), 15, 0.3, 0, 5);
+}
+
+/* Individual History Items */
+.history-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e9d5ff; /* Soft lavender text */
+    -fx-font-size: 16px;
+    -fx-padding: 12 20;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.history-list .list-cell:hover {
+    -fx-background-color: rgba(168, 85, 247, 0.3);
+    -fx-background-radius: 12;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.history-list .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(to right, #a855f7, #c084fc);
+    -fx-background-radius: 12;
+    -fx-text-fill: white;
+}
+
+/* Scrollbar Styling (Optional - makes it blend beautifully) */
+.history-list .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 10;
+}
+
+.history-list .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(168, 85, 247, 0.6);
+    -fx-background-radius: 10;
+}
+
+.history-list .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #a855f7;
+}
+
+/* Command Input Area */
+.command-interface {
+    -fx-padding: 60;
+    -fx-alignment: center;
+    -fx-spacing: 30;
+}
+
+.command-input {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-background-radius: 30;
+    -fx-border-color: rgba(168, 85, 247, 0.4);
+    -fx-border-radius: 30;
+    -fx-border-width: 2;
+    -fx-padding: 20;
+    -fx-font-size: 20px;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.6);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 15, 0.3, 0, 5);
+}
+
+.execute-button {
+    -fx-background-color: #9333ea;
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-padding: 16 70;
+    -fx-background-radius: 30;
+    -fx-effect: innershadow(gaussian, #c4b5fd, 20, 0.7, 0, 0);
+}
+
+.execute-button:hover {
+    -fx-background-color: #a855f7;
+    -fx-scale-x: 1.06;
+    -fx-scale-y: 1.06;
+    -fx-cursor: hand;
+}
+
+/* AI Hint Text */
+.ai-hint {
+    -fx-text-fill: #c4b5fd;
+    -fx-font-size: 15px;
+    -fx-opacity: 0.9;
+}
+
+/* Quick Actions */
+.quick-actions {
+    -fx-padding: 40 30;
+    -fx-spacing: 18;
+    -fx-alignment: top-center;
+}
+
+.quick-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e9d8fd;
+    -fx-padding: 0 0 20 0;
+}
+
+/* Quick Action Buttons - Now match the gradient theme perfectly */
+.quick-button {
+    -fx-background-color: linear-gradient(to bottom, #4c1d95, #a855f7);
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 14 30;
+    -fx-background-radius: 30;
+    -fx-pref-width: 240;
+    -fx-min-width: 240;
+    -fx-max-width: 240;
+    -fx-effect: dropshadow(gaussian, rgba(168, 85, 247, 0.6), 12, 0.4, 0, 4);
+    -fx-alignment: CENTER_LEFT;
+}
+
+.quick-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #6b46c1, #c084fc);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-cursor: hand;
+}
+
+.quick-button:pressed {
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+/* Individual Quick Action Colors */
+.notepad-button      { -fx-background-color: #6b46c1; }
+.calculator-button   { -fx-background-color: #7c3aed; }
+.screenshot-button   { -fx-background-color: #9333ea; }
+.youtube-button       { -fx-background-color: #a855f7; }
+.taskmanager-button  { -fx-background-color: #8b5cf6; }
+.settings-button     { -fx-background-color: #9f7aea; }
+
+/* Logout Button */
+.logout-button {
+    -fx-background-color: #ef4444;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 14 50;
+    -fx-background-radius: 30;
+    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.6), 15, 0.4, 0, 0);
+}
+
+.logout-button:hover {
+    -fx-background-color: #dc2626;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
