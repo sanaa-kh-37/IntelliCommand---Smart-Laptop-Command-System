@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,7 +23,10 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(resource);
         Parent root = loader.load();
         primaryStage.setTitle("IntelliCommand");
-        primaryStage.setScene(new Scene(root, 600, 500)); // Larger for advanced layout
+        primaryStage.setScene(new Scene(root, 600, 500));
+        // Larger for advanced layout
+        // Load Poppins font from Google Fonts (only once)
+        Font.loadFont("https://fonts.googleapis.com/css2?family=Poppins:wght@700;700italic&display=swap", 10);
         primaryStage.show();
 
         // Test DB (remove in prod)

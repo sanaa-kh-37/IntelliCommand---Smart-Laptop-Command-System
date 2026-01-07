@@ -8,9 +8,9 @@
             fx:controller="com.example.commandinterpreter.controller.MainController"
             stylesheets="@styles.css">
 
-    <!-- Header -->
+    <!-- Header - Title Centered, User on Right -->
     <top>
-        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
+        <HBox styleClass="header" alignment="CENTER_RIGHT" spacing="30">
             <Label text="IntelliCommand" styleClass="logo"/>
             <Region HBox.hgrow="ALWAYS"/>
             <Label fx:id="userLabel" text="Logged in as: Guest" styleClass="user-label"/>

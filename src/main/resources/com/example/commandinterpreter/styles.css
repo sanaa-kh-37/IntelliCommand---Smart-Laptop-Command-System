@@ -15,18 +15,31 @@
 
 /* Header */
 .header {
-    -fx-background-color: rgba(0, 0, 0, 0.3);
-    -fx-border-color: rgba(168, 85, 247, 0.3);
+    -fx-background-color: rgba(0, 0, 0, 0.4);
+    -fx-padding: 20 40 20 40;  /* This works perfectly in CSS */
+    -fx-border-color: transparent transparent rgba(255,255,255,0.15) transparent;
     -fx-border-width: 0 0 1 0;
-    -fx-padding: 20;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 15, 0.2, 0, 5);
-}
+    -fx-alignment: center;
+}/* Title - Professional, Bold, Italic, Solid Purple */
+ .logo {
+     -fx-font-size: 44px;
+     -fx-font-weight: bold;
+     -fx-font-style: italic;
+     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
+     -fx-text-fill: #a855f7;
+     -fx-padding: 0 20;
+     -fx-font-letter-spacing: 1.5px;
+ }
 
-.logo {
-    -fx-font-family: "System Bold";
-    -fx-font-size: 32px;
-    -fx-text-fill: #e9d8fd;
-    -fx-effect: innershadow(gaussian, #b388ff, 15, 0.6, 0, 0);
+ /* Optional: Slight letter spacing for more professional feel */
+ .logo {
+     -fx-font-letter-spacing: 2px;
+ }
+
+@keyframes pulse {
+    0% { -fx-effect: dropshadow(gaussian, #a855f7, 20, 0.8, 0, 0); }
+    50% { -fx-effect: dropshadow(gaussian, #c084fc, 30, 0.9, 0, 0); }
+    100% { -fx-effect: dropshadow(gaussian, #a855f7, 20, 0.8, 0, 0); }
 }
 
 .user-label {
