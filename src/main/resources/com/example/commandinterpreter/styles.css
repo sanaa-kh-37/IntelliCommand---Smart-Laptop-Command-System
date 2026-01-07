@@ -221,3 +221,68 @@
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
 }
+/* ====================== AUTH PAGES (Login & Register) - MATCHES REFERENCE ====================== */
+
+.auth-glass-card {
+    -fx-background-color: rgba(60, 40, 100, 0.45);
+    -fx-background-radius: 60;
+    -fx-padding: 90 80 110 80;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 70, 0.5, 0, 35);
+    -fx-border-radius: 60;
+    -fx-border-color: rgba(150, 100, 220, 0.2);
+    -fx-border-width: 1.5;
+}
+
+.auth-title {
+    -fx-font-size: 52px;
+    -fx-font-weight: 900;
+    -fx-text-fill: #bb86fc;
+}
+
+.auth-field {
+    -fx-pref-width: 460;
+    -fx-pref-height: 75;
+    -fx-background-color: rgba(120, 90, 170, 0.5);
+    -fx-background-radius: 45;
+    -fx-padding: 0 45 0 45;
+    -fx-font-size: 19px;
+    -fx-text-fill: #e8e0ff;
+    -fx-prompt-text-fill: rgba(232, 224, 255, 0.7);
+}
+
+.auth-field:focused {
+    -fx-background-color: rgba(140, 110, 190, 0.6);
+}
+
+.auth-submit {
+    -fx-pref-width: 420;
+    -fx-pref-height: 75;
+    -fx-background-color: linear-gradient(to bottom, #ab47bc, #ce93d8);
+    -fx-background-radius: 45;
+    -fx-text-fill: white;
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+    -fx-effect: none;
+}
+
+.auth-submit:hover {
+    -fx-background-color: linear-gradient(to bottom, #ba68c8, #e1bee7);
+}
+
+.auth-back {
+    -fx-pref-width: 400;
+    -fx-pref-height: 70;
+    -fx-background-color: transparent;
+    -fx-text-fill: #d4b3ff;
+    -fx-font-size: 21px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 45;
+    -fx-border-color: #ba68c8;
+    -fx-border-width: 5;
+    -fx-border-radius: 45;
+    -fx-effect: none;
+}
+
+.auth-back:hover {
+    -fx-background-color: rgba(186, 104, 200, 0.25);
+}
