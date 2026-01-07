@@ -2,50 +2,38 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="40"
+<VBox alignment="CENTER" spacing="60"
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.commandinterpreter.controller.LoginController"
-      style="-fx-background-color: linear-gradient(to bottom, #030213, #4c1d95, #a855f7);
-             -fx-background-image:
-                 radial-gradient(center 15% 25%, radius 2%, rgba(255,255,255,0.8) 0%, transparent 10%),
-                 radial-gradient(center 40% 60%, radius 1.5%, rgba(255,255,255,0.6) 0%, transparent 8%),
-                 radial-gradient(center 70% 40%, radius 2%, rgba(168,85,247,0.7) 0%, transparent 12%),
-                 radial-gradient(center 90% 80%, radius 1.8%, rgba(255,255,255,0.5) 0%, transparent 10%),
-                 radial-gradient(center 55% 90%, radius 2.2%, rgba(168,85,247,0.6) 0%, transparent 15%);
-             -fx-background-size: cover;
-             -fx-padding: 60;">
+      style="-fx-background-color: linear-gradient(to bottom, #120029, #4c0070, #8a2be2);
+             -fx-padding: 50;">
 
-    <!-- Glass Card -->
-    <VBox styleClass="auth-glass-card" alignment="CENTER" spacing="30" maxWidth="480">
+    <VBox styleClass="auth-glass-card" alignment="CENTER" spacing="40" prefWidth="540" prefHeight="680">
 
-        <!-- Glowing Title -->
-        <Label text="Welcome Back!" styleClass="auth-glow-title"/>
+        <Label text="Welcome Back!" styleClass="auth-title"/>
 
-        <!-- Subtitle -->
         <Label text="Log in to start commanding your PC"
-               style="-fx-text-fill: #e9d5ff; -fx-font-size: 18px; -fx-opacity: 0.9;"/>
+               style="-fx-text-fill: #e6e0ff; -fx-font-size: 19px; -fx-opacity: 0.95;"/>
 
-        <!-- Form -->
-        <VBox spacing="25" alignment="CENTER">
+        <VBox spacing="32" alignment="CENTER">
             <TextField fx:id="usernameField"
                        promptText="Enter your username"
-                       styleClass="auth-pill-field"/>
+                       styleClass="auth-field"/>
 
             <PasswordField fx:id="passwordField"
                            promptText="Enter your password"
-                           styleClass="auth-pill-field"/>
+                           styleClass="auth-field"/>
+        </VBox>
 
-            <!-- Buttons -->
-            <VBox spacing="18" alignment="CENTER">
-                <Button text="Login"
-                        onAction="#handleLogin"
-                        styleClass="auth-primary-button"/>
+        <VBox spacing="25" alignment="CENTER">
+            <Button text="Login"
+                    onAction="#handleLogin"
+                    styleClass="auth-submit"/>
 
-                <Button text="Register"
-                        onAction="#handleRegister"
-                        styleClass="auth-secondary-button"/>
-            </VBox>
+            <Button text="Register"
+                    onAction="#handleRegister"
+                    styleClass="auth-back"/>
         </VBox>
     </VBox>
 </VBox>

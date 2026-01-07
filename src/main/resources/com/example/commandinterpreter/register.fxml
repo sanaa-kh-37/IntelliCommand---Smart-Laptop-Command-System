@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -15,16 +15,20 @@
         <!-- Title -->
         <Label text="Register" styleClass="auth-title"/>
 
+
+
         <!-- Subtitle -->
         <Label text="Join IntelliCommand and take control!"
                style="-fx-text-fill: #e6e0ff; -fx-font-size: 19px; -fx-opacity: 0.95;"/>
 
         <!-- Fields -->
         <VBox spacing="32" alignment="CENTER">
+
             <TextField fx:id="usernameField"
                        promptText="Enter your username"
                        prefWidth="120"
                        styleClass="auth-field"/>
+
 
             <PasswordField fx:id="passwordField"
                            promptText="Enter your password"
@@ -37,14 +41,19 @@
                            styleClass="auth-field"/>
         </VBox>
 
+
         <VBox spacing="25" alignment="CENTER">
+
             <Button text="Submit"
                     onAction="#handleRegisterSubmit"
                     styleClass="auth-submit"/>
 
+
             <Button text="Back to Login"
+
                     onAction="#handleGoBackToLogin"
                     styleClass="auth-back"/>
+
         </VBox>
     </VBox>
 </VBox>
