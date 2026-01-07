@@ -3,59 +3,55 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.commandinterpreter.controller.MainController"
-            style="-fx-background-color: #f8f9fa;">
+            stylesheets="@/styles.css">
 
-    <!-- Top Header -->
+    <!-- Header -->
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20; -fx-background-color: #ffffff; -fx-border-color: #e0e0e0; -fx-border-width: 0 0 1 0;">
-            <Label text="IntelliCommand" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
+            <Label text="IntelliCommand" styleClass="logo"/>
             <Region HBox.hgrow="ALWAYS"/>
-            <Label fx:id="userLabel" text="Logged in as: Guest" style="-fx-font-size: 16px; -fx-text-fill: #27ae60;"/>
+            <Label fx:id="userLabel" text="Logged in as: Guest" styleClass="user-label"/>
         </HBox>
     </top>
 
-    <!-- Left: Dropdown History -->
+    <!-- History Panel (Left) -->
     <left>
-        <VBox spacing="15" style="-fx-padding: 20; -fx-background-color: #ffffff; -fx-border-color: #e0e0e0; -fx-border-width: 0 1 0 0;">
-            <Button text="📜 History ▼" fx:id="historyToggleBtn" onAction="#toggleHistory"
-                    style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10 20; -fx-background-radius: 20;"/>
-            <VBox fx:id="historyPanel" visible="false" managed="false" spacing="8" style="-fx-padding: 10;">
-                <Label text="Recent Commands" style="-fx-font-size: 14px; -fx-text-fill: #495057;"/>
-                <ListView fx:id="historyList" prefHeight="400" prefWidth="250"
-                          style="-fx-background-color: #f8f9fa; -fx-border-color: #dee2e6; -fx-border-radius: 10;"/>
+        <VBox styleClass="history-panel" spacing="15">
+            <Button text="📜 History ▼" fx:id="historyToggleBtn" onAction="#toggleHistory" styleClass="history-toggle"/>
+            <VBox fx:id="historyPanel" visible="false" managed="false" spacing="10">
+                <Label text="Recent Commands" styleClass="quick-label"/>
+                <ListView fx:id="historyList" prefHeight="400" prefWidth="280" styleClass="history-list"/>
             </VBox>
         </VBox>
     </left>
 
-    <!-- Center: Command Input Only -->
+    <!-- Main Command Area (Center) -->
     <center>
-        <VBox alignment="CENTER" spacing="30" style="-fx-padding: 80;">
-            <ComboBox fx:id="commandCombo" promptText="Type a command..." prefWidth="600" editable="true"
-                      style="-fx-background-color: white; -fx-background-radius: 30; -fx-padding: 15; -fx-font-size: 18px; -fx-border-color: #ced4da; -fx-border-radius: 30;"/>
-
-            <Button text="Execute ➜" onAction="#handleExecute"
-                    style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 20px; -fx-padding: 15 60; -fx-background-radius: 30;"/>
+        <VBox styleClass="command-interface">
+            <ComboBox fx:id="commandCombo" promptText="Type a command..." prefWidth="700" editable="true" styleClass="command-input"/>
+            <Button text="Execute ➜" onAction="#handleExecute" styleClass="execute-button"/>
+            <Label text="✨ AI-powered command suggestions enabled" styleClass="ai-hint"/>
         </VBox>
     </center>
 
-    <!-- Right: Quick Actions -->
+    <!-- Quick Actions (Right) -->
     <right>
-        <VBox spacing="15" alignment="TOP_CENTER" style="-fx-padding: 40;">
-            <Label text="Quick Actions" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #495057;"/>
+        <VBox styleClass="quick-actions">
+            <Label text="Quick Actions" styleClass="quick-label"/>
 
-            <Button text="📝 Notepad" onAction="#quickNotepad" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-padding: 12 30; -fx-background-radius: 25;"/>
-            <Button text="🧮 Calculator" onAction="#quickCalculator" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-padding: 12 30; -fx-background-radius: 25;"/>
-            <Button text="📸 Screenshot" onAction="#quickScreenshot" style="-fx-background-color: #fd7e14; -fx-text-fill: white; -fx-padding: 12 30; -fx-background-radius: 25;"/>
-            <Button text="▶ YouTube" onAction="#quickYoutube" style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-padding: 12 30; -fx-background-radius: 25;"/>
-            <Button text="🖥 Task Manager" onAction="#quickTaskManager" style="-fx-background-color: #6f42c1; -fx-text-fill: white; -fx-padding: 12 30; -fx-background-radius: 25;"/>
-            <Button text="⚙ Settings" onAction="#quickSettings" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-padding: 12 30; -fx-background-radius: 25;"/>
+            <Button text="📝 Notepad" onAction="#quickNotepad" styleClass="quick-button notepad-button"/>
+            <Button text="🧮 Calculator" onAction="#quickCalculator" styleClass="quick-button calculator-button"/>
+            <Button text="📸 Screenshot" onAction="#quickScreenshot" styleClass="quick-button screenshot-button"/>
+            <Button text="▶ YouTube" onAction="#quickYoutube" styleClass="quick-button youtube-button"/>
+            <Button text="🖥 Task Manager" onAction="#quickTaskManager" styleClass="quick-button taskmanager-button"/>
+            <Button text="⚙ Settings" onAction="#quickSettings" styleClass="quick-button settings-button"/>
 
             <Region VBox.vgrow="ALWAYS"/>
-
-            <Button text="Logout" onAction="#handleLogout"
-                    style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 12 40; -fx-background-radius: 30;"/>
+            <Button text="Logout" onAction="#handleLogout" styleClass="logout-button"/>
         </VBox>
     </right>
+
 </BorderPane>

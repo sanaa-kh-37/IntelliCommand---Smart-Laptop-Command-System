@@ -40,17 +40,23 @@ public class MainController extends BaseController implements Initializable {
         Platform.runLater(() -> {
             currentUser = (User) commandCombo.getScene().getUserData();
             if (currentUser != null) {
-                userLabel.setText("👤 Logged in as: " + currentUser.getUsername() + " (" + currentUser.getRole() + ")");
+                userLabel.setText("Logged in as: " + currentUser.getUsername() + " (" + currentUser.getRole() + ")");
                 historyService.setUser(currentUser.getId());
                 refreshHistory();
             }
             setupAutocomplete();
-            setupCleanHistoryList(); // Clean look, no stars
+            setupModernHistoryList(); // ← Improved styling
         });
     }
 
     private void setupAutocomplete() {
         commandCombo.setEditable(true);
+        commandCombo.getEditor().focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+            if (isNowFocused) {
+                commandCombo.show();
+            }
+        });
+
         commandCombo.getEditor().textProperty().addListener((obs, old, newVal) -> {
             if (newVal == null || newVal.trim().isEmpty()) {
                 commandCombo.hide();
@@ -58,22 +64,49 @@ public class MainController extends BaseController implements Initializable {
             }
             String lower = newVal.toLowerCase().trim();
             var suggestions = factory.getAllKnownCommands().stream()
-                    .filter(cmd -> cmd.startsWith(lower))
-                    .limit(10)
+                    .filter(cmd -> cmd.toLowerCase().contains(lower))
+                    .limit(12)
                     .collect(Collectors.toList());
-            commandCombo.setItems(FXCollections.observableArrayList(suggestions));
-            if (!suggestions.isEmpty()) commandCombo.show();
+
+            if (!suggestions.isEmpty()) {
+                commandCombo.setItems(FXCollections.observableArrayList(suggestions));
+                commandCombo.show();
+            } else {
+                commandCombo.hide();
+            }
         });
     }
 
-    private void setupCleanHistoryList() {
-        // Clean list without stars
-        historyList.setCellFactory(lv -> new ListCell<String>() {
+    // NEW: Modern, clean history list that matches the purple theme
+    private void setupModernHistoryList() {
+        historyList.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
-                setText(empty ? null : "   " + item); // Indented clean text
-                setStyle("-fx-font-family: 'Segoe UI'; -fx-font-size: 14px; -fx-text-fill: #495057;");
+                if (empty || item == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText("  " + item);
+                    setStyle("""
+                        -fx-font-family: 'Segoe UI', Arial, sans-serif;
+                        -fx-font-size: 15px;
+                        -fx-text-fill: #e9d8fd;
+                        -fx-padding: 10 15;
+                        -fx-background-color: rgba(255, 255, 255, 0.08);
+                        -fx-background-radius: 12;
+                        -fx-border-radius: 12;
+                        """);
+                }
+            }
+        });
+
+        // Hover effect on history items
+        historyList.setOnMouseClicked(e -> {
+            String selected = historyList.getSelectionModel().getSelectedItem();
+            if (selected != null) {
+                commandCombo.getEditor().setText(selected);
+                commandCombo.getEditor().positionCaret(selected.length());
             }
         });
     }
@@ -87,8 +120,7 @@ public class MainController extends BaseController implements Initializable {
         historyList.setItems(combined);
     }
 
-    @FXML
-    private void handleExecute(ActionEvent event) {
+    @FXML private void handleExecute(ActionEvent event) {
         String input = commandCombo.getEditor().getText();
         if (input == null || input.trim().isEmpty()) return;
 
@@ -101,13 +133,14 @@ public class MainController extends BaseController implements Initializable {
                 historyService.addCommand(cmdText);
                 refreshHistory();
             } catch (Exception ex) {
-                // Silent on error (no output box)
+                // Silent fail
             }
         }
         commandCombo.getEditor().clear();
+        commandCombo.hide();
     }
 
-    // Quick Actions
+    // Quick Actions (unchanged)
     @FXML private void quickNotepad() { runCommand("open notepad"); }
     @FXML private void quickCalculator() { runCommand("open calculator"); }
     @FXML private void quickScreenshot() { runCommand("take screenshot"); }
@@ -120,16 +153,14 @@ public class MainController extends BaseController implements Initializable {
         handleExecute(null);
     }
 
-    @FXML
-    private void toggleHistory() {
+    @FXML private void toggleHistory() {
         boolean visible = historyPanel.isVisible();
         historyPanel.setVisible(!visible);
         historyPanel.setManaged(!visible);
         historyToggleBtn.setText(visible ? "📜 History ▼" : "📜 History ▲");
     }
 
-    @FXML
-    private void handleLogout(ActionEvent event) throws IOException {
+    @FXML private void handleLogout(ActionEvent event) throws IOException {
         switchScene("/com/example/commandinterpreter/login.fxml", 600, 500);
     }
 
