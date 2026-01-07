@@ -14,25 +14,31 @@ import java.net.URL;
 public abstract class BaseController {
 
     protected void switchScene(String fxmlPath, double width, double height) throws IOException {
+
         Stage stage = (Stage) getReferenceNode().getScene().getWindow();
-        URL resource = getClass().getResource(fxmlPath);
-        if (resource == null) {
-            throw new IllegalStateException("FXML not found: " + fxmlPath);
-        }
 
-        FXMLLoader loader = new FXMLLoader(resource);
+        // 🔹 Save window states
+        boolean wasMaximized = stage.isMaximized();
+        boolean wasFullscreen = stage.isFullScreen();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Parent root = loader.load();
-        Scene scene = new Scene(root, width, height);
 
-        URL cssUrl = getClass().getResource("/com/example/commandinterpreter/styles.css");
-        if (cssUrl != null) {
-            scene.getStylesheets().add(cssUrl.toExternalForm());
-        } else {
-            System.out.println("Warning: styles.css not found – running without custom styling");
-        }
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(
+                getClass().getResource("/com/example/commandinterpreter/styles.css").toExternalForm()
+        );
 
         stage.setScene(scene);
+
+        // 🔹 Restore states
+        stage.setMaximized(wasMaximized);
+        stage.setFullScreen(wasFullscreen);
+
+        stage.show();
     }
+
+
 
     protected void showAlert(Alert.AlertType type, String title, String message) {
         Alert alert = new Alert(type);

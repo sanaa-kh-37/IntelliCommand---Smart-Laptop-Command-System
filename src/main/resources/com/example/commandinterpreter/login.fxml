@@ -23,7 +23,7 @@
                style="-fx-font-style: italic;"/>
 
         <!-- SUBTITLE -->
-        <Label text="Welcome back! Log in to continue."
+        <Label text="Welcome to IntelliCommand!"
                style="-fx-text-fill: #e6e0ff;
                       -fx-font-size: 19px;
                       -fx-font-weight: bold;

@@ -2,6 +2,7 @@ package com.example.commandinterpreter.controller;
 
 import com.example.commandinterpreter.model.User;
 import com.example.commandinterpreter.service.AuthService;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +27,7 @@ public class LoginController extends BaseController {
 
     @FXML
     private void handleLogin(ActionEvent event) throws IOException {
+
         String username = usernameField.getText().trim();
         String password = passwordField.getText();
 
@@ -34,32 +37,48 @@ public class LoginController extends BaseController {
         }
 
         User user = authService.loginUser(username, password);
+
         if (user != null) {
-            // Load new scene
-            URL resource = getClass().getResource("/com/example/commandinterpreter/main.fxml");
-            if (resource == null) {
-                throw new IllegalStateException("main.fxml not found");
-            }
-
-            FXMLLoader loader = new FXMLLoader(resource);
-            Parent root = loader.load();
-            Scene newScene = new Scene(root, 800, 600);
-
-
-            newScene.setUserData(user);
-
-
-            URL cssUrl = getClass().getResource("/com/example/commandinterpreter/styles.css");
-            if (cssUrl != null) {
-                newScene.getStylesheets().add(cssUrl.toExternalForm());
-            }
 
             Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(newScene);
+
+            // 🔹 Save window state
+            boolean wasMaximized = stage.isMaximized();
+            boolean wasFullscreen = stage.isFullScreen();
+
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/commandinterpreter/main.fxml")
+            );
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            scene.setUserData(user);
+            scene.getStylesheets().add(
+                    getClass().getResource("/com/example/commandinterpreter/styles.css").toExternalForm()
+            );
+
+            // 🔹 Smooth fade
+            root.setOpacity(0);
+            stage.setScene(scene);
+
+            FadeTransition fade = new FadeTransition(Duration.millis(350), root);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+            fade.play();
+
+            // 🔹 Restore fullscreen / maximize
+            stage.setMaximized(wasMaximized);
+            stage.setFullScreen(wasFullscreen);
+
+            stage.show();
+
         } else {
             showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username or password.");
         }
     }
+
+
+
 
     @FXML
     private void handleRegister(ActionEvent event) throws IOException {
