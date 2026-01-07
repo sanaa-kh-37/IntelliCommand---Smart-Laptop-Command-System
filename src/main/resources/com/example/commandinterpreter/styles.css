@@ -21,14 +21,16 @@
     -fx-border-width: 0 0 1 0;
     -fx-alignment: center;
 }/* Title - Professional, Bold, Italic, Solid Purple */
+ /* Title - Restored: Bold, Italic, Solid Purple with Subtle Professional Look */
  .logo {
      -fx-font-size: 44px;
      -fx-font-weight: bold;
      -fx-font-style: italic;
-     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
-     -fx-text-fill: #a855f7;
-     -fx-padding: 0 20;
-     -fx-font-letter-spacing: 1.5px;
+     -fx-font-family: "Segoe UI", "Helvetica", sans-serif;  /* Clean modern font */
+     -fx-text-fill: #a855f7;                                /* Solid vibrant purple */
+     -fx-padding: 0 30;
+     -fx-font-letter-spacing: 2px;                          /* Professional spacing */
+     -fx-effect: dropshadow(gaussian, rgba(168, 85, 247, 0.6), 15, 0.4, 0, 5); /* Subtle soft glow */
  }
 
  /* Optional: Slight letter spacing for more professional feel */

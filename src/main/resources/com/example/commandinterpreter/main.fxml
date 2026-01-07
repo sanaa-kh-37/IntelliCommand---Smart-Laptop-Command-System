@@ -3,6 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.commandinterpreter.controller.MainController"
@@ -10,9 +12,21 @@
 
     <!-- Header - Title Centered, User on Right -->
     <top>
-        <HBox styleClass="header" alignment="CENTER_RIGHT" spacing="30">
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
+            <!-- Logo on the left -->
+            <ImageView fitHeight="48" fitWidth="48" preserveRatio="true">
+                <image>
+                    <Image url="@logo.png" />
+                </image>
+            </ImageView>
+
+            <!-- Project Title -->
             <Label text="IntelliCommand" styleClass="logo"/>
+
+            <!-- Push user label to the right -->
             <Region HBox.hgrow="ALWAYS"/>
+
+            <!-- User on the top-right -->
             <Label fx:id="userLabel" text="Logged in as: Guest" styleClass="user-label"/>
         </HBox>
     </top>
