@@ -42,7 +42,7 @@ com.example.commandinterpreter
 └── styles.css      → Custom CSS for styling
 
 ## CLASS DIAGRAM
-(Coming soon)
+![Class diagram](Image/Classdiagram.png)
 
 ## SCREENSHOTS
 (Coming soon)
@@ -89,5 +89,5 @@ Contributions are encouraged.let's evolve IntelliCommand together.
 ## CONTRIBUTORS
 
 **Marwa Sajjad** [](https://github.com/marwakhan-sa)
-**Sana Khwaja** [](https://github.com/sanaa-kh-37)
+**Sana Khawaja** [](https://github.com/sanaa-kh-37)
 
