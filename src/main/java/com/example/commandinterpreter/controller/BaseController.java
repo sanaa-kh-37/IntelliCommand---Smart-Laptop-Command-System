@@ -10,14 +10,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
-// Abstract base for controllers (Abstraction & Inheritance)
 public abstract class BaseController {
 
     protected void switchScene(String fxmlPath, double width, double height) throws IOException {
 
         Stage stage = (Stage) getReferenceNode().getScene().getWindow();
 
-        // 🔹 Save window states
         boolean wasMaximized = stage.isMaximized();
         boolean wasFullscreen = stage.isFullScreen();
 
@@ -31,7 +29,6 @@ public abstract class BaseController {
 
         stage.setScene(scene);
 
-        // 🔹 Restore states
         stage.setMaximized(wasMaximized);
         stage.setFullScreen(wasFullscreen);
 

@@ -17,15 +17,14 @@ public class HistoryService {
     }
 
     public void addCommand(String command) {
-        // ← FIXED: Safe null and empty check
         if (command == null || command.trim().isEmpty()) {
-            return; // Do nothing if command is null or empty
+            return;
         }
 
         String trimmed = command.trim();
 
         if (currentUserId != -1) {
-            // Add to top (newest first)
+
             history.add(0, trimmed);
             dbHandler.saveCommandHistory(currentUserId, trimmed);
         }
@@ -35,7 +34,7 @@ public class HistoryService {
         history.clear();
         if (currentUserId != -1) {
             var loaded = dbHandler.loadCommandHistory(currentUserId);
-            Collections.reverse(loaded); // Oldest first → reverse to newest first
+            Collections.reverse(loaded);
             history.addAll(loaded);
         }
     }

@@ -9,19 +9,18 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-// Encapsulation: Loads config; Abstraction for dynamic commands
 public class ConfigLoader {
     private final Map<String, Command> dynamicCommands = new HashMap<>();
 
     public ConfigLoader() {
-        loadFromJson(); // Load at init (scalable)
+        loadFromJson();
     }
 
     private void loadFromJson() {
         try (InputStream inputStream = getClass().getResourceAsStream("/com/example/commandinterpreter/commands.json")) {
             if (inputStream == null) {
                 System.out.println("Warning: commands.json not found – no dynamic commands loaded");
-                return; // Graceful exit – app continues without dynamic commands
+                return;
             }
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -38,7 +37,6 @@ public class ConfigLoader {
                 String type = obj.getString("type");
                 String osCmd = obj.getString("osCommand");
                 String feedback = obj.getString("feedback");
-                // boolean admin = obj.getBoolean("admin"); // Uncomment if needed
 
                 Command cmd;
                 if ("browser".equals(type)) {

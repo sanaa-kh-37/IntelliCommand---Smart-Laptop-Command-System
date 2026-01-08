@@ -10,19 +10,16 @@
       style="-fx-background-color: linear-gradient(to bottom, #0f0020, #3a0070, #6f00b3);
              -fx-padding: 50;">
 
-    <!-- Glass Card -->
     <VBox styleClass="auth-glass-card"
           alignment="CENTER"
           spacing="45"
           prefWidth="540"
           prefHeight="740">
 
-        <!-- LOGIN TITLE -->
         <Label text="Login"
                styleClass="auth-title"
                style="-fx-font-style: italic;"/>
 
-        <!-- SUBTITLE -->
         <Label text="Welcome to IntelliCommand!"
                style="-fx-text-fill: #e6e0ff;
                       -fx-font-size: 19px;
@@ -30,7 +27,6 @@
                       -fx-font-style: italic;
                       -fx-opacity: 0.95;"/>
 
-        <!-- INPUT FIELDS -->
         <VBox spacing="32" alignment="CENTER">
 
             <TextField fx:id="usernameField"
@@ -42,7 +38,6 @@
                            styleClass="auth-field"/>
         </VBox>
 
-        <!-- BUTTONS -->
         <VBox spacing="25" alignment="CENTER">
 
             <Button text="Login"

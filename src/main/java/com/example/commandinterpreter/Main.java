@@ -16,7 +16,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        // Load login FXML (UI separated from logic)
         URL resource = getClass().getResource("/com/example/commandinterpreter/login.fxml");
         if (resource == null) {
             throw new IllegalStateException("Cannot find login.fxml");
@@ -33,11 +32,9 @@ public class Main extends Application {
         primaryStage.setTitle("IntelliCommand");
         primaryStage.setScene(scene);
 
-        // 🔹 AUTO FULLSCREEN ON FIRST LAUNCH
         primaryStage.setFullScreen(true);
-        primaryStage.setFullScreenExitHint(""); // Remove "Press ESC to exit fullscreen"
+        primaryStage.setFullScreenExitHint("");
 
-        // Load Poppins font (safe – optional)
         Font.loadFont(
                 "https://fonts.googleapis.com/css2?family=Poppins:wght@700;700italic&display=swap",
                 10
@@ -45,7 +42,6 @@ public class Main extends Application {
 
         primaryStage.show();
 
-        // Test DB (remove in production)
         new DatabaseHandler().testConnection();
     }
 
