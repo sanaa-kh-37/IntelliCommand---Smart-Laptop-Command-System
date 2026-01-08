@@ -45,11 +45,15 @@ com.example.commandinterpreter
 ![Class diagram](Image/Classdiagram.png)
 
 ## SCREENSHOTS
-(Coming soon)
 
 Login interface: 
+![Login interface screenshot](Image/Login.png)
+
 Register interface:
+![Register interface screenshot](Image/Register.png)
+
 Dashboard(main interface):
+![Main interface screenshot](Image/Main.png)
 
 ## GETTING STARTED:
 Ready to try IntelliCommand? Follow these simple steps to get it running locally.
