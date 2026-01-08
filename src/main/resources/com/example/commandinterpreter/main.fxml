@@ -10,28 +10,22 @@
             fx:controller="com.example.commandinterpreter.controller.MainController"
             stylesheets="@styles.css">
 
-    <!-- Header - Title Centered, User on Right -->
     <top>
         <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
-            <!-- Logo on the left -->
             <ImageView fitHeight="48" fitWidth="48" preserveRatio="true">
                 <image>
                     <Image url="@logo.png" />
                 </image>
             </ImageView>
 
-            <!-- Project Title -->
             <Label text="IntelliCommand" styleClass="logo"/>
 
-            <!-- Push user label to the right -->
             <Region HBox.hgrow="ALWAYS"/>
 
-            <!-- User on the top-right -->
             <Label fx:id="userLabel" text="Logged in as: Guest" styleClass="user-label"/>
         </HBox>
     </top>
 
-    <!-- Quick Actions - NOW ON THE LEFT -->
     <left>
         <VBox styleClass="quick-actions">
             <Label text="Quick Actions" styleClass="quick-label"/>
@@ -48,7 +42,6 @@
         </VBox>
     </left>
 
-    <!-- History Panel - NOW ON THE RIGHT -->
     <right>
         <VBox styleClass="history-panel" spacing="15">
             <Button text="📜 History ▼" fx:id="historyToggleBtn" onAction="#toggleHistory" styleClass="history-toggle"/>
@@ -59,7 +52,6 @@
         </VBox>
     </right>
 
-    <!-- Central Command Input -->
     <center>
         <VBox styleClass="command-section" spacing="25" alignment="CENTER">
             <TextField fx:id="commandInput" promptText="Type your command here..."

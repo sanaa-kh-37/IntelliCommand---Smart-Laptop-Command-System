@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 public class MainController extends BaseController implements Initializable {
 
     // UI Elements
-    @FXML private TextField commandInput;        // Manual command input (no suggestions)
+    @FXML private TextField commandInput;
     @FXML private ListView<String> historyList;
     @FXML private Label userLabel;
     @FXML private Button historyToggleBtn;
@@ -35,13 +35,12 @@ public class MainController extends BaseController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Load user info and history when the scene is ready
+
         Platform.runLater(() -> {
             if (commandInput.getScene() != null && commandInput.getScene().getUserData() instanceof User) {
                 currentUser = (User) commandInput.getScene().getUserData();
                 userLabel.setText("Logged in as: " + currentUser.getUsername());
 
-                // Load this user's command history from database
                 historyService.setUser(currentUser.getId());
                 historyList.setItems(historyService.getHistory());
             } else {
@@ -54,8 +53,7 @@ public class MainController extends BaseController implements Initializable {
             if (selected != null && !selected.isEmpty()) {
                 commandInput.setText(selected);
                 commandInput.requestFocus();
-                commandInput.positionCaret(selected.length()); // Cursor at end
-                // Optional: auto-execute on double click
+                commandInput.positionCaret(selected.length());
                 if (event.getClickCount() == 2) {
                     handleExecute(null);
                 }
@@ -63,44 +61,37 @@ public class MainController extends BaseController implements Initializable {
         });
     }
 
-    // Execute button or Enter key in text field triggers this
     @FXML
     private void handleExecute(ActionEvent event) {
         String input = commandInput.getText().trim();
 
         if (input.isEmpty()) {
-            return; // Do nothing if empty
+            return;
         }
 
         Command command = factory.getCommand(input);
 
         if (command == null) {
-            // Unknown command → just clear and continue (no error noise)
+
             commandInput.clear();
             return;
         }
 
         try {
-            // Execute the command
             command.execute(currentUser);
 
-            // Speak feedback
             new Thread(() -> voice.speakText(command.getSpokenFeedback())).start();
 
-            // Save to history
             historyService.addCommand(input);
-            historyList.refresh(); // Update list view
+            historyList.refresh();
 
         } catch (Exception e) {
-            // Silent handling (or you can show an alert later if needed)
             e.printStackTrace();
         }
 
-        // Clear input for next command
         commandInput.clear();
     }
 
-    // Quick Action Buttons — they just trigger common commands
     @FXML private void quickNotepad()       { runCommand("open notepad"); }
     @FXML private void quickCalculator()   { runCommand("open calculator"); }
     @FXML private void quickScreenshot()   { runCommand("take screenshot"); }
@@ -108,13 +99,11 @@ public class MainController extends BaseController implements Initializable {
     @FXML private void quickTaskManager()  { runCommand("open task manager"); }
     @FXML private void quickSettings()     { runCommand("open settings"); }
 
-    // Helper to run quick commands
     private void runCommand(String commandText) {
         commandInput.setText(commandText);
-        handleExecute(null); // Trigger execution immediately
+        handleExecute(null);
     }
 
-    // Toggle history panel visibility
     @FXML
     private void toggleHistory() {
         boolean isVisible = historyPanel.isVisible();
@@ -123,7 +112,6 @@ public class MainController extends BaseController implements Initializable {
         historyToggleBtn.setText(isVisible ? "📜 History ▼" : "📜 History ▲");
     }
 
-    // Logout back to login screen
     @FXML
     private void handleLogout(ActionEvent event) throws IOException {
         switchScene("/com/example/commandinterpreter/login.fxml", 600, 500);

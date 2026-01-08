@@ -2,7 +2,7 @@ package com.example.commandinterpreter.db;
 
 import com.example.commandinterpreter.model.Role;
 import com.example.commandinterpreter.model.User;
-import org.mindrot.jbcrypt.BCrypt; // For secure hashing (Encapsulation of security)
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -91,7 +91,7 @@ public class DatabaseHandler {
 
 
                 if (storedPassword.startsWith("$2")) {
-                    // Hashed with BCrypt → normal check
+
                     if (BCrypt.checkpw(password, storedPassword)) {
                         return new User(username, password, role);
                     }
@@ -115,7 +115,7 @@ public class DatabaseHandler {
         return null;
     }
 
-    // Helper method to update password
+
     private void updatePassword(String username, String newHashed) {
         String sql = "UPDATE users SET password = ? WHERE username = ?";
 
@@ -133,7 +133,6 @@ public class DatabaseHandler {
         }
     }
 
-    // Other methods...
     public void testConnection() {
         try (Connection conn = connect()) {
             System.out.println("DB Connected");
@@ -142,7 +141,6 @@ public class DatabaseHandler {
         }
     }
 
-    // Save a command to history
     public void saveCommandHistory(int userId, String command) {
         String sql = "INSERT INTO command_history (user_id, command_text) VALUES (?, ?)";
 
@@ -159,7 +157,6 @@ public class DatabaseHandler {
         }
     }
 
-    // Load all commands for a user, newest first
     public List<String> loadCommandHistory(int userId) {
         List<String> history = new ArrayList<>();
         String sql = "SELECT command_text FROM command_history WHERE user_id = ? ORDER BY executed_at DESC";
@@ -181,7 +178,6 @@ public class DatabaseHandler {
         return history;
     }
 
-    // Get user ID by username (used during login)
     public int getUserId(String username) {
         String sql = "SELECT id FROM users WHERE username = ?";
 

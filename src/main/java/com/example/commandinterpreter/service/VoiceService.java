@@ -2,7 +2,7 @@ package com.example.commandinterpreter.service;
 
 import java.io.IOException;
 
-// Encapsulation: All speech logic hidden here
+
 public class VoiceService {
     public void speakText(String text) {
         if (text == null || text.trim().isEmpty()) return;

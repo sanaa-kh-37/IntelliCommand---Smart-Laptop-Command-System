@@ -13,12 +13,11 @@ public class User {
         this.role = role;
     }
 
-    // Old constructor for backward compatibility
     public User(String username, String password, Role role) {
         this(-1, username, password, role);
     }
 
-    // Getters & Setters
+
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

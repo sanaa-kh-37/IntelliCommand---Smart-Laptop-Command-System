@@ -42,7 +42,7 @@ public class LoginController extends BaseController {
 
             Stage stage = (Stage) usernameField.getScene().getWindow();
 
-            // 🔹 Save window state
+
             boolean wasMaximized = stage.isMaximized();
             boolean wasFullscreen = stage.isFullScreen();
 
@@ -57,7 +57,7 @@ public class LoginController extends BaseController {
                     getClass().getResource("/com/example/commandinterpreter/styles.css").toExternalForm()
             );
 
-            // 🔹 Smooth fade
+
             root.setOpacity(0);
             stage.setScene(scene);
 
@@ -66,7 +66,7 @@ public class LoginController extends BaseController {
             fade.setToValue(1);
             fade.play();
 
-            // 🔹 Restore fullscreen / maximize
+
             stage.setMaximized(wasMaximized);
             stage.setFullScreen(wasFullscreen);
 

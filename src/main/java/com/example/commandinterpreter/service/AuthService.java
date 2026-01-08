@@ -4,7 +4,7 @@ import com.example.commandinterpreter.db.DatabaseHandler;
 import com.example.commandinterpreter.model.Role;
 import com.example.commandinterpreter.model.User;
 
-// Abstraction: Interface could be added, but here service abstracts DB
+
 public class AuthService {
     private final DatabaseHandler dbHandler = new DatabaseHandler(); // Composition (Aggregation)
 
