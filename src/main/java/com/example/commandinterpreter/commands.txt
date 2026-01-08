@@ -1,0 +1,39 @@
+            "open notepad"
+            case "open calculator", "open calc"
+            case "open paint"
+            case "open command prompt", "open cmd"
+            case "open task manager"
+            case "open file explorer"
+            case "take screenshot", "open snipping tool"
+            case "open volume mixer"
+
+            // Settings & Control Panel (use 'start ms-settings:' or direct)
+            case "open settings"
+            case "open display settings"
+            case "open sound settings"
+            case "open control panel"
+            case "open devices and printers"
+            case "open programs and features"
+
+            // Browsers (Windows registered app commands)
+            case "open chrome"
+            case "open edge"
+            case "open firefox"
+
+            // Websites
+            case "open youtube"
+            case "open google"
+            case "open gmail"
+            case "open github"
+            case "open whatsapp web"
+            case "open chatgpt"
+
+            // Admin-only power commands
+            case "shutdown pc", "turn off computer"
+            case "restart pc", "reboot computer"
+            case "sleep pc", "put computer to sleep"
+            case "lock computer", "lock screen"
+
+            // Fun / Extra (Clear Recycle Bin now works without admin)
+            case "open god mode"
+            case "clear recycle bin"
